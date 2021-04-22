@@ -51,7 +51,7 @@ const routes = [
 
       {path:'/admin_users/create',component:AdminUserEdit},
       {path:'/admin_users/edit/:id',component:AdminUserEdit,props:true},
-      {path:'/admin_users/list',component:AdminUserList}
+      {path:'/admin_users/list',component:AdminUserList},
     ]
   },
 ]
