@@ -61,37 +61,6 @@
       </template>
     </m-list-card>
 
-    <m-card icon="card-hero" title="英雄列表">
-      <div class="nav jc-between">
-        <div class="nav-item active">
-          <div class="nav-link">热门</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">新闻</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">公告</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">活动</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">赛事</div>
-        </div>
-      </div>
-      <div class="pt-3">
-          <swiper>
-            <swiper-slide v-for="m in 5" :key="m">
-              <div class="py-2" v-for="n in 5" :key="n">
-                <span class="title text-primary fs-sm">新闻</span>
-                <span class="fs-lg flex-1"> 4月23日体验服停机更新公告</span>
-                <span>04/23</span>
-              </div>
-            </swiper-slide>
-          </swiper>
-        </div>
-    </m-card>
-
     <m-card icon="video" title="精彩视频">
       <div class="nav jc-between">
         <div class="nav-item active">
