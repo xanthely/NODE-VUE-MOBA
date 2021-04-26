@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const schema = new mongoose.Schema({
   name:{type:String},
   avatar:{type:String},
+  banner:{type:String},
   title:{type:String},
   //可以有多个职业，所以定义为数组
   categories:[{type:mongoose.SchemaTypes.ObjectId, ref: 'Category'}],
@@ -17,8 +18,9 @@ const schema = new mongoose.Schema({
   skills:[{
     icon:{type:String},
     name:{type:String},
+    delay:{type:String},
+    cost:{type:String},
     decription:{type:String},
-    tips:{type:String},
   }],
   //出装
   items1:[{type:mongoose.SchemaTypes.ObjectId, ref: 'Item'}],
@@ -35,4 +37,4 @@ const schema = new mongoose.Schema({
   }],
 })
 
-module.exports = mongoose.model('Hero',schema)
+module.exports = mongoose.model('Hero',schema,'heroes')
