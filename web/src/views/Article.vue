@@ -9,6 +9,7 @@
           2019-06-19
         </div>
     </div>
+    <!-- v-html 将富文本编辑器中html样式保留显示 -->
     <div v-html="model.body" class="px-4 body fs-lg"></div>
   </div>
 </template>

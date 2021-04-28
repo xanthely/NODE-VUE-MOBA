@@ -2,7 +2,6 @@
   <div class="about">
     <h1>{{id ? '编辑' : '新建'}}管理员</h1>
     <el-form label-width="120px" @submit.native.prevent="save">
-      </el-form-item>
       <el-form-item label="用户名">
         <el-input v-model="model.username"></el-input>
       </el-form-item>

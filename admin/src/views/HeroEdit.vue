@@ -33,6 +33,7 @@
             </el-upload>
           </el-form-item>
           <el-form-item label="类型">
+            <!-- 多选下拉菜单 -->
             <el-select v-model="model.categories" multiple>
               <el-option v-for="item of categories" :key="item._id"
               :label="item.name" :value="item._id"></el-option>
@@ -114,6 +115,7 @@
           <el-row type="flex" style="flex-wrap:wrap">
             <el-col :md="12" v-for="(item,i) in model.partners" :key="i">
               <el-form-item label="英雄">
+                <!-- filterable 过滤，通过输入关键字更方便查找 -->
                 <el-select filterable v-model="item.hero">
                   <el-option
                   v-for="hero in heroes"
@@ -167,7 +169,7 @@ export default {
       }else{
         res = await this.$http.post('rest/heroes',this.model)
       }
-      // this.$router.push('/heroes/list')
+      this.$router.push('/heroes/list')
       this.$message({
         type:'success',
         message:'保存成功'
@@ -175,6 +177,8 @@ export default {
     },
     async fetch(){
       const res = await this.$http.get(`rest/heroes/${this.id}`)
+      // 避免data中定义的scores被覆盖
+      // 简单理解为对象属性的合并，也可以使用扩展符...
       this.model = Object.assign({},this.model,res.data)
     },
     async fetchCategories(){

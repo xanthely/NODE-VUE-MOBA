@@ -5,7 +5,7 @@ const schema = new mongoose.Schema({
   categories:[{type:mongoose.SchemaTypes.ObjectId, ref: 'Category'}],
   body:{type:String}
 },{
-  timestamps:true
+  timestamps:true // 时间戳，自动带有创建时间和更新时间
 })
 
 module.exports = mongoose.model('Article',schema)

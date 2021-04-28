@@ -37,4 +37,6 @@ const schema = new mongoose.Schema({
   }],
 })
 
+// 数据库集合名称一般为模型名的小写复数，也可以在这里直接指定
+// 这里会直接改为heros，但是实际上应该是heroes，所以单独指定
 module.exports = mongoose.model('Hero',schema,'heroes')

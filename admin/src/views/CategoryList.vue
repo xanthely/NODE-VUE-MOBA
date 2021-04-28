@@ -13,6 +13,7 @@
         label="操作"
         width="180">
         <template slot-scope="scope">
+          <!-- scope.row 表示这一行数据 -->
           <el-button type="text" size="small" 
           @click="$router.push(`/categories/edit/${scope.row._id}`)">
             编辑

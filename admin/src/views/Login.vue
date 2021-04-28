@@ -10,7 +10,7 @@
           <el-input v-model="model.username"></el-input>
         </el-form-item>
         <el-form-item label="密码">
-          <!--show-password 切换显示隐藏 -->
+          <!-- show-password 切换显示隐藏 -->
           <el-input v-model="model.password" show-password></el-input>
         </el-form-item>
         <el-form-item>
@@ -31,9 +31,9 @@
     methods:{
       async login(){
         const res = await this.$http.post('login', this.model)
-        //永久保存token
+        // 永久保存token
         localStorage.token = res.data.token
-        //保存token，关闭浏览器后没了
+        // 保存token，关闭浏览器后没了
         // sessoinStorage.token = res.data.token
 
         this.$router.push('/')

@@ -7,6 +7,9 @@ app.set('secret','eirufoierufcskdxjodoie')
 
 app.use(require('cors')())
 app.use(express.json())
+
+// 静态文件托管
+// 使后面地址的文件可以直接通过/uploads访问
 app.use('/uploads',express.static(__dirname + '/uploads'))
 
 require('./plugins/db')(app)

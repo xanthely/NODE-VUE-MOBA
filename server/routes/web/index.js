@@ -6,21 +6,28 @@ module.exports = app => {
   const Article = mongoose.model('Article')
   const Hero = mongoose.model('Hero')
 
+  //导入新闻数据
   router.get('/news/init', async (req, res) => {
     const parent = await Category.findOne({
       name: '新闻分类'
     })
+    // 上级分类为新闻分类的分类
     const cats = await Category.find().where({
       parent: parent
     }).lean()
     const newsTitles = ["王者荣耀×吉列联名款剃须刀锋芒全场", "快手棋王争霸赛", "狄某有话说｜有辅助装我不买，我就蹭线，哎，就是玩儿~", "元芳潍坊国际风筝会“环游记”纪实", "穿越了？！着唐服，商秘事，与策划畅谈英雄数值设计&amp;英雄重塑", "4月23日体验服停机更新公告", "4月23日体验服S23赛季王者段位专属赛季拖尾奖励发放公告", "【王者荣耀】权限使用说明", "4月21日净化游戏环境声明及处罚公告", "4月21日外挂专项打击公告", "鸿运抽奖活动开启公告", "【入职探案】免费限时语音包-“掐指一算，这把能赢”活动公告", "春风携礼游峡谷，梦入江南烟水路", "【入职探案】免费限时语音包-“掐指一算，这把能赢”活动公告", "一元福利周活动公告"]
+
+    // 循环newsList
     const newsList = newsTitles.map(title => {
+      // 随机取一个分类
       const randomCats = cats.slice(0).sort((a, b) => Math.random() - 0.5)
       return {
         categories: randomCats.slice(0, 2),
         title: title
       }
     })
+
+    // 清空原数据库数据再插入
     await Article.deleteMany({})
     await Article.insertMany(newsList)
     res.send(newsList)
@@ -36,24 +43,26 @@ module.exports = app => {
     //     path:'newsList'
     //   }
     // }).lean()
+
+    // 找到顶级分类
     const parent = await Category.findOne({
       name: '新闻分类'
     })
     //aggregate  mongoose中的聚合查询
     const cats = await Category.aggregate([
-      //通过 $match 过滤数据
+      //通过 $match 过滤数据 类似where
       { $match: { parent: parent._id } },
       {
-        //关联查询
+        //关联查询 类似join
         $lookup: {
           from: 'articles',
-          localField: '_id',
-          foreignField: 'categories',
+          localField: '_id', // 主键
+          foreignField: 'categories', // 外健
           as: 'newsList'
         }
       },
       {
-        //修改newsList
+        //修改newsList， 每个类别的newslist保留五个
         $addFields: {
           'newsList': { $slice: ['$newsList', 5] }
         }
@@ -68,6 +77,7 @@ module.exports = app => {
     })
     cats.map(cat => {
       cat.newsList.map(news => {
+        // 如果当前分类为热门的话，显示子分类的名称，如果不是分类显示真正的名称
         news.categoryName = (cat.name === '热门')
           ? news.categories[0].name : cat.name
         return news

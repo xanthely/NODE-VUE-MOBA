@@ -13,6 +13,10 @@
       </el-form-item>
       <el-form-item label="详情">
         <!-- 富文本编辑器 -->
+        <!-- 
+          useCustomImageHandler 使用自定义图片处理
+          @image-added 自定义图片处理事件
+        -->
         <vue-editor v-model="model.body" useCustomImageHandler 
         @image-added="handleImageAdded"></vue-editor>
       </el-form-item>
@@ -25,8 +29,7 @@
 
 
 <script>
-  //用于解决图片上传过大的问题
-  //解构的方式获得单独一部分
+  // 解构的方式获得单独一部分
 import { VueEditor } from 'vue2-editor'
 
 export default {
@@ -43,8 +46,11 @@ export default {
     }
   },
   methods:{
+    
+    // 默认将图片用base64编码，存在图片文件过大问题
+    // 用于解决图片上传过大的问题
     async handleImageAdded(file, Editor, cursorLocation, resetUploader) {
-      const formData = new FormData();
+      const formData = new FormData(); //表单数据
       formData.append("file", file);
       const res = await this.$http.post('upload',formData);
       //在光标处(第一个参数)插入一个图片(第二个参数)，图片地址为第三个参数
@@ -52,6 +58,7 @@ export default {
       //重置上传器
       resetUploader();
     },
+    
     async save(){
       let res
       if(this.id){

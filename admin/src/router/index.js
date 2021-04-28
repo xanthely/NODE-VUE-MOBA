@@ -30,6 +30,7 @@ const routes = [
     component: Main,
     children:[
       {path:'/categories/create',component:CategoryEdit},
+      //props:true 表示把url中的参数注入到CategoryEdit页面中
       {path:'/categories/edit/:id',component:CategoryEdit,props:true},
       {path:'/categories/list',component:CategoryList},
 
@@ -60,6 +61,7 @@ const router = new VueRouter({
   routes
 })
 
+// 导航守卫
 router.beforeEach((to, from, next) => {
   if(!to.meta.isPublic && !localStorage.token){
     return next('/login')

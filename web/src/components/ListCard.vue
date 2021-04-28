@@ -8,6 +8,8 @@
       </div>
     </div>
     <div class="pt-3">
+      <!-- 把swiper真正的索引值赋给active -->
+      <!-- :options="{autoHeight:true}" 设置自动高度  -->
       <swiper ref="list" :options="{autoHeight:true}"
       @slide-change="() => active = $refs.list.swiper.realIndex">
         <swiper-slide v-for="(category,i) in categories" :key="i">

@@ -12,6 +12,7 @@
           :headers="getAuthHeaders()"
           :show-file-list="false"
           :on-success="afterUpload">
+          <!-- 如果有图片显示图片，没有图片显示上传图标 -->
           <img v-if="model.icon" :src="model.icon" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
@@ -36,6 +37,8 @@ export default {
   },
   methods:{
     afterUpload(res){
+      // 可以理解为显式赋值，参数为赋值的主体，属性，要赋上的值
+      // 如果不用这种方式，可以直接在定义model时加上icon属性
       this.$set(this.model,'icon',res.url)
     },
     async save(){

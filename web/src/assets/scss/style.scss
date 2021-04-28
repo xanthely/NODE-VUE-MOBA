@@ -1,9 +1,9 @@
 @import './variables';
 
-//reset
+//样式重置 reset
 * {
   box-sizing: border-box;
-  outline: none;
+  outline: none; // 高亮
 }
 
 html {
@@ -25,7 +25,7 @@ p,em {
   line-height: 1.5rem;
 }
 
-
+// text-white bg-white
 @each $colorKey, $color in $colors {
   .text-#{$colorKey} {
     color: $color
@@ -42,6 +42,7 @@ p,em {
   }
 }
 
+// fs-sm
 @each $sizeKey, $size in $font-sizes {
   .fs-#{$sizeKey} {
     font-size: $size * $base-font-size;
@@ -75,14 +76,14 @@ p,em {
   flex-wrap: wrap;
 }
 
-
+// jc-between
 @each $key, $value in $flex-jc {
   .jc-#{$key} {
     justify-content: $value;
   }
 }
 
-
+// ai-between
 @each $key,$value in $flex-ai {
   .ai-#{$key} {
     align-items: $value;
@@ -134,6 +135,7 @@ p,em {
   padding: 0.2rem 0.6rem;
 }
 
+// 嵌套写法
 //nav
 .nav{
   display: flex;
@@ -146,6 +148,7 @@ p,em {
       border-bottom-color: map-get($colors,'primary');
     }
   }
+  // 反色
   &.nav-inverse {
     .nav-item {
       color: map-get($colors,'white');
@@ -161,11 +164,15 @@ p,em {
   background: url(../images/index.png) no-repeat;
   background-size: 28.8462rem;
   display: inline-block;
+  // & 父级选择器
+  // 导航图标
   &.sprite-news {
     width: 1.7692rem;
     height: 1.5385rem;
     background-position: 63.546% 15.517%;
   }
+
+  // 收起箭头
   &.sprite-arrow {
     width: 0.7692rem;
     height: 0.7692rem;

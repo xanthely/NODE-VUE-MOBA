@@ -1,6 +1,6 @@
 <template>
   <div>
-    <swiper  :options="swiperOption">
+    <swiper :options="swiperOption">
       <swiper-slide>
         <img class="w-100" src="../assets/images/6fb45960f3578bdaf4daaf75c32cd0d2.jpeg">
       </swiper-slide>
@@ -10,6 +10,7 @@
       <swiper-slide>
         <img class="w-100" src="../assets/images/ed4f0a315b1c2d68002b609f00e76717.jpeg">
       </swiper-slide>
+      <!-- 幻灯片指示点 -->
       <div class="swiper-pagination pagination-home text-right px-3 pb-2" 
       slot="pagination">
       </div>
@@ -32,6 +33,10 @@
     <!-- end of nav icons -->
 
     <m-list-card icon="menu1" title="新闻资讯" :categories="newsCats">
+      <!-- 
+        #items 表示与listCard中名为items的插槽相关
+        {category} 从子组件中拿到category
+       -->
       <template #items="{category}">
         <router-link 
         tag="div"
@@ -107,7 +112,6 @@ export default {
   data() {
     return {
       swiperOption:{
-        autoplay:true,
         pagination: {
           el:".pagination-home",
         }
@@ -117,6 +121,7 @@ export default {
     };
   },
   methods: {
+    // 获取新闻分类
     async fetchNewsCats(){
       const res = await this.$http.get('news/list')
       this.newsCats = res.data
@@ -153,6 +158,7 @@ export default {
   .nav-item {
     width:25%;
     border-right: 1px solid $border-color;
+    // 每4个child不加右边框
     &:nth-child(4n) {
       border-right:none;
     }

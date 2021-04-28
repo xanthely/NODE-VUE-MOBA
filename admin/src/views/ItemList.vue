@@ -7,6 +7,7 @@
       <el-table-column prop="name" label="物品名称">
       </el-table-column>
       <el-table-column prop="icon" label="图标">
+        <!-- 自定义字段内容 -->
         <template slot-scope="scope">
           <img :src="scope.row.icon" style="height:3rem">
         </template>

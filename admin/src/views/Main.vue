@@ -4,8 +4,9 @@
       <!-- 
         unique-opened  一次只能展开一个折叠菜单 
         default-openeds  设置默认打开的菜单 如： :default-openeds="['1']"
-        :default-active="$route.path"  根据地址栏显示高亮
+        :default-active="$route.path"  根据路径显示高亮
       -->
+      <!-- 在el-menu中加入router使点击相应项可以跳转至index指定路由 -->
       <el-menu router unique-opened :default-active="$route.path">
         <el-submenu index="1">
           <template slot="title"><i class="el-icon-message"></i>内容管理</template>
@@ -67,6 +68,7 @@
       </el-header>
       
       <el-main>
+        <!-- 根据路由显示页面 使跳转页面时表单内容重载 -->
         <router-view :key="$route.path"></router-view>
       </el-main>
     </el-container>

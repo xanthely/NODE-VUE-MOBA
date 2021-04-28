@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 const schema = new mongoose.Schema({
   name:{type:String},
+  // 表示类型为数据库中的id，ref表示关联的模型
   parent:{type:mongoose.SchemaTypes.ObjectId, ref: 'Category'}
 })
 
