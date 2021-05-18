@@ -20,7 +20,7 @@ const schema = new mongoose.Schema({
     name:{type:String},
     delay:{type:String},
     cost:{type:String},
-    decription:{type:String},
+    description:{type:String},
   }],
   //出装
   items1:[{type:mongoose.SchemaTypes.ObjectId, ref: 'Item'}],

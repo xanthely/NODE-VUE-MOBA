@@ -131,7 +131,7 @@
 1. 首页新闻资讯-数据录入(+后台bug修复)
     * 获取所有新闻资讯标题:
       ```js
-      $$('.new_list .title).map( el => el.innerHTML).slice(5) 
+      $$('.news_list .title').map( el => el.innerHTML).slice(5) 
       ```
 
     * 通过js手动录入数据。当使用b模型引用a模型时，如果a模型没有引用或使用过，可能会报错。npm安装require-all，用于将所有模型引用进来使用一遍。在服务器端plugins中的db.js中引用并将model中所有模型使用一遍
@@ -188,6 +188,34 @@
 
 1. 英雄详情页-3-前端顶部
 1. 英雄详情页-4-完善
+
+## 自我完善
+1. 精彩视频部分
+    * 增加视频模型，管理员首页对其管理
+    * 浏览器抓取数据：
+      ```js
+      JSON.stringify(
+        $$('.video-nav > li').map((li, i) => {
+          return {
+            categoryName:li.innerText,
+            videos: $$('li',$$('.video_list')[i]).map(el => {
+              return {
+                title: $$('a',el)[0].title,
+                image:$$('a > img',el)[0].src
+              }
+            })
+          }
+        })
+      )
+      ```
+
+1. 导航部分
+    * 将导航部分还原官网
+    * 实现收起效果
+
+1. 新闻与详情相互跳转
+1. 新闻详情部分数据导入
+1. 完善英雄详情界面
 
 ## 四、发布和部署 (阿里云)
 

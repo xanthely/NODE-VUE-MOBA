@@ -1,4 +1,5 @@
 <template>
+  
   <m-card :icon="icon" :title="title">
     <div class="nav jc-between">
       <div class="nav-item" :class="{active:active === i}"

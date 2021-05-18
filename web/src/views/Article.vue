@@ -1,7 +1,7 @@
 <template>
   <div class="page-article" v-if="model">
     <div class="d-flex py-3 px-2 border-bottom">
-      <div class="iconfont icon-back text-blue"></div>
+       <div class="iconfont icon-back text-blue" @click="back"></div>
         <strong class="flex-1 text-blue pl-2">
           {{model.title}}
         </strong>
@@ -9,8 +9,10 @@
           2019-06-19
         </div>
     </div>
-    <!-- v-html 将富文本编辑器中html样式保留显示 -->
-    <div v-html="model.body" class="px-4 body fs-lg"></div>
+
+    <div>
+      <div class="body" v-html="model.body"></div>
+    </div>
   </div>
 </template>
 
@@ -28,6 +30,9 @@ export default {
     async fetch(){
       const res = await this.$http.get(`articles/${this.id}`)
       this.model = res.data
+    },
+    back() {
+      this.$router.back();
     }
   },
   created() {
@@ -75,6 +80,6 @@ export default {
   position: absolute;
   left: 0px;
   top: -0.5rem;
-  margin: 0;
+  margin: 0 auto;
 }
 </style>

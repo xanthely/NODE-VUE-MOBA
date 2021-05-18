@@ -19,6 +19,9 @@
         <div class="nav-item">
           <router-link class="nav-link" tag="div" to="/">赛事中心</router-link>
         </div>
+        <div class="nav-item">
+          <router-link class="nav-link" tag="div" to="/">IP新游</router-link>
+        </div>
       </div>
     </div>
 

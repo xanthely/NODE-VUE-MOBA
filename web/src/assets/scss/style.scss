@@ -23,6 +23,12 @@ a {
 }
 p,em {
   line-height: 1.5rem;
+  margin-block-start: 0.1rem;
+  margin-block-end: 0.1rem;
+}
+
+.text-height {
+  line-height: 1.2rem;
 }
 
 // text-white bg-white
@@ -57,6 +63,13 @@ p,em {
   white-space: nowrap;
 }
 
+// text-clip
+.text-clip {
+  display: inline-block;
+  overflow:hidden;
+  text-overflow:clip;
+}
+
 //width,height
 .w-100 {
   width: 100%;
@@ -66,9 +79,12 @@ p,em {
 }
 
 //flex
-.d-flex {
-  display: flex;
+@each $key,$value in $display {
+  .d-#{$key} {
+    display: $value;
+  }
 }
+
 .flex-column {
   flex-direction: column;
 }
@@ -164,13 +180,62 @@ p,em {
   background: url(../images/index.png) no-repeat;
   background-size: 28.8462rem;
   display: inline-block;
+  width: 1.7692rem;
+  height: 1.5385rem;
   // & 父级选择器
   // 导航图标
   &.sprite-news {
-    width: 1.7692rem;
-    height: 1.5385rem;
     background-position: 63.546% 15.517%;
   }
+
+  &.sprite-story {
+    background-position: 90.483% 15.614%;
+  }
+
+  &.sprite-mall {
+    background-position: 36.746% 0.924%;
+  }
+
+  &.sprite-try {
+    background-position: 10.408% 15.517%;
+  }
+
+  &.sprite-new {
+    background-position: 89.733% 1.266%;
+  }
+
+  &.sprite-smriti {
+    background-position: 36.467% 15.287%;
+  }
+
+  &.sprite-camp {
+    background-position: 63.3% 0.927%;
+  }
+
+  &.sprite-accounts {
+    background-position: 0 96.207%;
+  }
+
+  &.sprite-version {
+    background-position: 0 96.207%;
+  }
+
+  &.sprite-ambient {
+    background-position: 36.746% 0.924%;
+  }
+
+  &.sprite-team {
+    background-position: 90.483% 15.614%;
+  }
+
+  &.sprite-idea {
+    background-position: 90.483% 15.614%;
+  }
+
+  &.sprite-arrow {
+    background-position: 36.746% 0.924%;
+  }
+
 
   // 收起箭头
   &.sprite-arrow {

@@ -44,6 +44,14 @@ $flex-ai:(
   stretch:stretch,
 );
 
+$display:(
+  block:block,
+  inline:inline,
+  inline-block:inline-block,
+  flex:flex,
+  none:none
+);
+
 //spacing
 //.mt-1 => margin top
 $spacing-types:(m:margin, p:padding);

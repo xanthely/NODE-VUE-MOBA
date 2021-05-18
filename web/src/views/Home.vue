@@ -17,17 +17,64 @@
     </swiper>
     <!-- end of swiper -->
 
-    <div class="nav-icons bg-white mt-3 text-center pt-3 text-grey">
-      <div class="d-flex flex-wrap">
-        <div class="nav-item mb-3" 
-          v-for="n in 12" :key="n">
+    <div class="nav-icons bg-white mt-3 text-center pt-3">
+      <div class="d-flex flex-wrap" :class="{open: changeClass}" style="overflow:hidden">
+        <div class="nav-item mb-3">
             <i class="sprite sprite-news"></i>
           <div class="py-2">爆料站</div>
         </div>
-      </div>    
-      <div class="bg-right py-2 fs-sm">
+        <div class="nav-item mb-3">
+            <i class="sprite sprite-story"></i>
+          <div class="py-2">故事站</div>
+        </div>
+        <div class="nav-item mb-3">
+            <i class="sprite sprite-mall"></i>
+          <div class="py-2">周边商城</div>
+        </div>
+        <div class="nav-item mb-3">
+            <i class="sprite sprite-try"></i>
+          <div class="py-2">体验服</div>
+        </div>
+        <div class="nav-item mb-3">
+            <i class="sprite sprite-new"></i>
+          <div class="py-2">新人专区</div>
+        </div>
+        <div class="nav-item mb-3">
+            <i class="sprite sprite-smriti"></i>
+          <div class="py-2">荣耀·传承</div>
+        </div>
+        <div class="nav-item mb-3">
+            <i class="sprite sprite-camp"></i>
+          <div class="py-2">王者营地</div>
+        </div>
+        <div class="nav-item mb-3">
+            <i class="sprite sprite-accounts"></i>
+          <div class="py-2">公众号</div>
+        </div>
+        <div class="nav-item mb-3">
+            <i class="sprite sprite-version"></i>
+          <div class="py-2">版本介绍</div>
+        </div>
+        <div class="nav-item mb-3">
+            <i class="sprite sprite-ambient"></i>
+          <div class="py-2">对局环境</div>
+        </div>
+        <div class="nav-item mb-3">
+            <i class="sprite sprite-team"></i>
+          <div class="py-2">无限王者团</div>
+        </div>
+        <div class="nav-item mb-3">
+            <i class="sprite sprite-idea"></i>
+          <div class="py-2">创意互动营</div>
+        </div>
+      </div>
+      <div v-if="changeClass == 0" class="bg-right py-2 fs-sm bg-light" @click="change()">
         <i class="sprite sprite-arrow mr-1"></i>
         收起
+      </div>
+      <div v-else class="bg-right py-2 fs-sm bg-light" @click="change()">
+        <i class="sprite sprite-arrow mr-1" style="transform: rotate(180deg);"></i>
+        展开
       </div>
     </div>
     <!-- end of nav icons -->
@@ -38,7 +85,7 @@
         {category} 从子组件中拿到category
        -->
       <template #items="{category}">
-        <router-link 
+        <router-link
         tag="div"
         :to="`/articles/${news._id}`"
         class="py-2 fs-lg d-flex" 
@@ -65,37 +112,21 @@
         </div>
       </template>
     </m-list-card>
-
-    <m-card icon="video" title="精彩视频">
-      <div class="nav jc-between">
-        <div class="nav-item active">
-          <div class="nav-link">热门</div>
+    
+    <m-list-card icon="card-video" title="精彩视频" :categories="videoCats">
+      <template #items="{category}">
+        <div class="d-flex flex-wrap" style="margin:0 -0.5rem">
+          <router-link 
+          tag="div" :to="`/videos/${video._id}`"
+          class="p-2 text-center" 
+          style="width:50%; "
+          v-for="(video, i) in category.videoList" :key="i">
+            <img :src="video.image" class="w-100" style="height:7.3077rem">
+            <div class=" text-ellipsis-2">{{video.title}}</div>
+          </router-link>
         </div>
-        <div class="nav-item">
-          <div class="nav-link">新闻</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">公告</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">活动</div>
-        </div>
-        <div class="nav-item">
-          <div class="nav-link">赛事</div>
-        </div>
-      </div>
-      <div class="pt-3">
-          <swiper>
-            <swiper-slide v-for="m in 5" :key="m">
-              <div class="py-2" v-for="n in 5" :key="n">
-                <span class="title text-primary fs-sm">新闻</span>
-                <span class="fs-lg flex-1"> 4月23日体验服停机更新公告</span>
-                <span>04/23</span>
-              </div>
-            </swiper-slide>
-          </swiper>
-        </div>
-    </m-card>
+      </template>
+    </m-list-card>
 
   </div>
 </template>
@@ -117,7 +148,9 @@ export default {
         }
       },
       newsCats: [],
-      heroCats: []
+      heroCats: [],
+      videoCats: [],
+      changeClass:1
     };
   },
   methods: {
@@ -129,11 +162,19 @@ export default {
     async fetchHeroCats(){
       const res = await this.$http.get('heroes/list')
       this.heroCats = res.data
+    },
+    async fetchVideoCats(){
+      const res = await this.$http.get('videos/list')
+      this.videoCats = res.data
+    },
+    change(){
+      this.changeClass == 1 ? this.changeClass = 0 : this.changeClass = 1
     }
   },
   created(){
     this.fetchNewsCats();
     this.fetchHeroCats();
+    this.fetchVideoCats();
   }
 }
 </script>
@@ -169,5 +210,18 @@ export default {
   border-radius: .15rem;
   padding:.1rem .2rem;
   border: 1px solid map-get($colors,'primary')
+}
+
+.text-ellipsis-2{
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.open{
+  height:4.9rem;
 }
 </style>
